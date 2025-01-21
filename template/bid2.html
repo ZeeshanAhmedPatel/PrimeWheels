@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bid.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PrimeBid</h1>
+    </header>
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='image/car-1.png') }}" alt="Car Image">
+    </div>
+
+    <div class="content">
+        <div class="car-info">
+            <h2>Car Information</h2>
+            <p><strong>Make:</strong> Mercedes</p>
+            <p><strong>Model:</strong> 2024</p>
+            <p><strong>Variant:</strong> Benz</p>
+            <p><strong>Color:</strong> Blue</p>
+            <p><strong>Mileage:</strong> 25 km/l</p>
+            <p><strong>Running:</strong> 1,500 km</p>
+            <p><strong>Amount:</strong> $55,000</p>
+        </div>
+
+        <div class="users-container">
+            <h2>Current Bids</h2>
+            <div id="users">
+                {% for user, bid in bids.items() %}
+                <p><strong>{{ user }}</strong>: $<span id="{{ user }}">{{ bid or "No bid yet" }}</span></p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="bid-container">
+            <h2>Place Your Bid</h2>
+            <input type="text" id="user" value="User 1" readonly>
+            <input type="number" id="bidAmount" placeholder="Enter your bid">
+            <button onclick="submit_bid2()">Submit Bid</button>
+        </div>
+
+        <div class="timer" id="timer"></div>
+    </div>
+
+    <script>
+        let users = ["User 1", "User 2", "User 3", "User 4"];
+        let currentIndex = 0;
+
+        function submit_bid2() {
+            const user = document.getElementById("user").value;
+            const bidAmount = document.getElementById("bidAmount").value;
+
+            if (!bidAmount) {
+                alert("Please enter your bid amount.");
+                return;
+            }
+
+            fetch('/submit_bid2', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ user, bid: bidAmount })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateBids(data.bids);
+                    currentIndex = (currentIndex + 1) % users.length;
+                    startAutoBidding();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function auto_bid2(user) {
+            fetch('/auto_bid2', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ user })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateBids(data.bids);
+                    currentIndex = (currentIndex + 1) % users.length;
+
+                    // Continue auto-bidding if it's not User 1's turn
+                    if (users[currentIndex] !== "User 1") {
+                        startAutoBidding();
+                    } else {
+                        document.getElementById("user").value = "User 1";
+                        document.getElementById("timer").innerText = "It's your turn!";
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function startAutoBidding() {
+            if (users[currentIndex] !== "User 1") {
+                const user = users[currentIndex];
+                document.getElementById("timer").innerText = `It's ${user}'s turn. Waiting 5 seconds...`;
+                setTimeout(() => {
+                    auto_bid2(user);
+                }, 5000);
+            }
+        }
+
+        function updateBids(bids) {
+            for (const [user, bid] of Object.entries(bids)) {
+                document.getElementById(user).innerText = bid || "No bid yet";
+            }
+        }
+    </script>
+</body>
+</html>

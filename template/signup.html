@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='SignUp.css')}}">
+</head>
+
+<body>
+    <div class="box">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <span class="borderline"></span>
+        <form method="POST" action="/register">
+            <h2>Sign Up</h2>
+            <div class="inputBox">
+                <input type="text" required="required" name="name" id="name">
+                <span>Username</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="email" required="required" name="email" id="email">
+                <span>Email</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="password" required="required" name="password" id="password">
+                <span>Password</span>
+                <i></i>
+            </div>
+            <div class="links">
+                <a href="#">Forgot password</a>
+                <a href="#">Sign up</a>
+            </div>
+            <input type="submit" value="SignUp">
+        </form>
+    </div>
+  
+</body>
+</html>

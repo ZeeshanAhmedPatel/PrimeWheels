@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+    <!-- custom js file link  -->
+    <link rel="JSsheet" href="{{url_for('static',filename='script.js')}}">
+
+    <!-- custom js file link  -->
+    <link rel="JSsheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.js">
+
+
+    <title>Our Services</title>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <a href="/home" class="logo"> <span>Prime</span>wheels </a>
+
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="/vehicles">Popular</a>
+            <a href="/services">services</a>
+            <a href="/featured">featured</a>
+            <a href="/reviews">reviews</a>
+            <a href="/contact">contact</a>
+        </nav>
+
+        <div id="login-btn">
+            <a href="/login">Login</a>
+            <i class="far fa-user"></i>
+        </div>
+
+    </header>
+
+
+    <section class="home" id="home">
+
+        <h3 data-speed="-2" class="home-parallax">find your car</h3>
+
+        <img data-speed="5" class="home-parallax" src="{{url_for('static',filename='image/home-img.png')}}" alt="">
+
+        <a data-speed="7" href="/featured" class="btn home-parallax">explore cars</a>
+
+    </section>
+
+    <section class="services" id="services">
+
+        <h1 class="heading"> our <span>services</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <i class="fas fa-car"></i>
+                <h3>Instant Vehicle Valuation</h3>
+                <p>Provide a quick and accurate valuation tool for users to estimate the market value of their cars
+                    before listing them for bidding. </p>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-tools"></i>
+                <h3>Auction Assistance</h3>
+                <p> Guide sellers and buyers through the car auction process, ensuring transparency and ease.</p>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-car-crash"></i>
+                <h3>Secure Payment Gateway</h3>
+                <p>Offer a seamless and secure payment system to ensure safe transactions between buyers and sellers.</p>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-car-battery"></i>
+                <h3>Vehicle History Reports</h3>
+                <p> Provide comprehensive vehicle history reports for bidders to make informed decisions.</p>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-gas-pump"></i>
+                <h3>Premium Listing Services</h3>
+                <p>Allow sellers to feature their cars prominently on the platform to attract more bids.
+                </p>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-headset"></i>
+                <h3>Logistics and Delivery Support</h3>
+                <p>Simplify the process of transporting purchased vehicles to buyers.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="footer" id="footer">
+
+        <div class="box-container">
+    
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +92-336-6232082 </a>
+                <a href="#"> <i class="fas fa-phone"></i> +92-312-3363292 </a>
+                <a href="#"> <i class="fas fa-envelope"></i> m.alifazal975@gmail.com </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> City - Country - 000000 </a>
+            </div>
+    
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+                <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+                <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            </div>
+    
+        </div>
+    
+        <div class="credit"> Created By TechSpace Develepors | All Rights Reserved </div>
+    
+    </section>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+
+</body>
+
+</html>
